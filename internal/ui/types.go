@@ -31,3 +31,9 @@ const (
 	LoopAll  = 1
 	LoopOne  = 2
 )
+
+const (
+	loginPassword = iota
+	loginPasswordHashed
+	loginApi
+)
