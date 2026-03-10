@@ -80,6 +80,9 @@ func redactURL(rawUrl string) string {
 	if _, ok := q["p"]; ok {
 		q.Set("p", "<REDACTED>")
 	}
+	if _, ok := q["apiKey"]; ok {
+		q.Set("apiKey", "<REDACTED>")
+	}
 
 	parsed.RawQuery = q.Encode()
 	return parsed.String()
