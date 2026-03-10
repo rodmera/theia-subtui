@@ -187,7 +187,7 @@ func (m model) handleLoginResult(msg loginResultMsg) (tea.Model, tea.Cmd) {
 			m.loginInputs[3].EchoMode = textinput.EchoNormal
 			m.loginInputs[3].SetValue(api.AppServerConfig.Server.PasswordSalt)
 
-		case "apikey":
+		case "api_key":
 			m.loginType = 2
 			m.loginInputs[1].Prompt = "Username: "
 			m.loginInputs[1].Placeholder = "username"
