@@ -268,6 +268,10 @@ func (m model) handleStatus(msg statusMsg) (tea.Model, tea.Cmd) {
 			m.coverArt = nil
 		}
 
+		// Clear lyrics
+		m.songLinesOffset = 0
+		m.songLyrics[0].Lines = []api.LyricLine{}
+
 		cmds = append(cmds, tea.SetWindowTitle("SubTUI"))
 		return m, tea.Batch(cmds...)
 	}
