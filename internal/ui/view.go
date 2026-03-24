@@ -1035,6 +1035,8 @@ func mediaPlayerLyricsContent(m model, width int, height int) string {
 // Generate the media player progress bar
 func mediaPlayerProgressBarContent(m model, width int) string {
 	var availableWidth int
+	var equalCharCount int
+	var dashCharCounts int
 
 	var currentTime string
 	var progressBar string
@@ -1051,9 +1053,19 @@ func mediaPlayerProgressBarContent(m model, width int) string {
 		percent = m.playerStatus.Current / m.playerStatus.Duration
 	}
 	infoLen := len(currentTime) + 4 + len(totalTime) // 2x padding
-	progressLen := int(percent * float64(availableWidth-infoLen))
-	progressBar += " [" + strings.Repeat("=", progressLen) + ">"
-	progressBar += strings.Repeat("-", availableWidth-infoLen-progressLen-1) + "] " // >-char
+	equalCharCount = int(percent * float64(availableWidth-infoLen))
+	dashCharCounts = availableWidth - infoLen - equalCharCount - 1 // >-char
+
+	if equalCharCount < 0 {
+		equalCharCount = 0
+	}
+
+	if dashCharCounts < 0 {
+		dashCharCounts = 0
+	}
+
+	progressBar += " [" + strings.Repeat("=", equalCharCount) + ">"
+	progressBar += strings.Repeat("-", dashCharCounts) + "] "
 
 	bar = lipgloss.JoinHorizontal(
 		lipgloss.Center,
