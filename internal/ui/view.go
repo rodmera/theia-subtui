@@ -617,6 +617,20 @@ func footerInformation(m model, width int) string {
 		songTitle = "Loading..."
 	} else {
 		songTitle = api.SanitizeDisplayString(m.playerStatus.Title)
+
+		if len(m.queue) > 0 {
+			song := m.queue[m.queueIndex]
+			favStatus := generateStar(m, song.ID)
+			starStatus := "[" + strings.Repeat("★", song.Rating) + "]"
+
+			if favStatus != "  " && song.Rating != 0 {
+				songTitle += " " + favStatus + starStatus
+			} else if favStatus != "  " {
+				songTitle += " " + favStatus
+			} else if song.Rating != 0 {
+				songTitle += " " + starStatus
+			}
+		}
 	}
 
 	if !m.notify {
