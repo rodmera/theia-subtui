@@ -91,6 +91,11 @@ type model struct {
 	pageOffset      int
 	pageHasMore     bool
 
+	// Selection state
+	showSelection   bool
+	selectionAnchor int
+	selectionMap    map[int]bool
+
 	// Mouse state
 	lastClickTime time.Time
 	lastClickId   string
