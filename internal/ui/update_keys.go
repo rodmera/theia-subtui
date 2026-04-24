@@ -459,16 +459,18 @@ func enter(m model) (tea.Model, tea.Cmd) {
 }
 
 func toggleSelection(m model) (tea.Model, tea.Cmd) {
+	// Clear map
+	m.selectionMap = make(map[int]bool)
+
 	if m.showSelection {
 		m.showSelection = false
 		m.selectionAnchor = -1
 	} else {
 		m.showSelection = true
 		m.selectionAnchor = m.cursorMain
-	}
 
-	// Clear map
-	m.selectionMap = make(map[int]bool)
+		m = selectionScroller(m)
+	}
 
 	return m, nil
 }
