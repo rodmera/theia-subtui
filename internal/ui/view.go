@@ -725,8 +725,15 @@ func footerInformation(m model, width int) string {
 	}
 	infoLen := len(currentTime) + 4 + len(totalTime) // 2x padding
 	progressLen := int(percent * float64(width-infoLen))
+	if progressLen < 0 {
+		progressLen = 0
+	}
+	dashLen := width - infoLen - progressLen - 1
+	if dashLen < 0 {
+		dashLen = 0
+	}
 	progressBar += " [" + strings.Repeat("=", progressLen) + ">"
-	progressBar += strings.Repeat("-", width-infoLen-progressLen-1) + "] " // >-char
+	progressBar += strings.Repeat("-", dashLen) + "] " // >-char
 
 	bottomRow = lipgloss.JoinHorizontal(
 		lipgloss.Center,
@@ -1570,6 +1577,9 @@ func calculateMainWidthAndHeight(width int, height int) (int, int) {
 
 	if availableHeight < 1 {
 		availableHeight = 1
+	}
+	if availableWidth < 0 {
+		availableWidth = 0
 	}
 
 	return availableWidth, availableHeight
