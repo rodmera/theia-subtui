@@ -38,7 +38,7 @@ func main() {
 
 	// Check for version
 	if *showVersion {
-		fmt.Printf("Version: %s | Commit: %s\n", version, commit)
+		fmt.Printf("Version: %s | Commit: %s | theia-subtui\n", version, commit)
 		os.Exit(0)
 	}
 
