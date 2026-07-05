@@ -608,17 +608,22 @@ func (m model) buildFooterBorder() lipgloss.Style {
 		base = activeBorderStyle
 	}
 
+	theiaTag := " theia "
+
 	if len(m.queue) > 0 {
 		queueStatus := fmt.Sprintf(" QUEUE (%d/%d) ", m.queueIndex+1, len(m.queue))
 
 		b := lipgloss.RoundedBorder()
-		topWidth := max(m.width-2-len(queueStatus)-2, 0)
-		b.Top = strings.Repeat("─", topWidth) + queueStatus + "──"
+		topWidth := max(m.width-2-len(queueStatus)-2-len(theiaTag), 0)
+		b.Top = theiaTag + strings.Repeat("─", topWidth) + queueStatus + "──"
 
 		return base.Border(b)
 	}
 
-	return base
+	b := lipgloss.RoundedBorder()
+	topWidth := max(m.width-2-len(theiaTag), 0)
+	b.Top = theiaTag + strings.Repeat("─", topWidth)
+	return base.Border(b)
 }
 
 // Generate the footer information

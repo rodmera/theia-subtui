@@ -17,6 +17,7 @@ Upstream base: v2.14.3 (commit e5702ad).
 
 ### Changed
 - **Versión con distintivo:** `subtui -v` muestra `| theia-subtui` al final para identificar el fork vs. el binario upstream.
+- **Tag visual en UI:** borde superior del panel principal muestra ` theia ` (visible en todo momento, con o sin cola activa). Implementado en `internal/ui/view.go` función `footerStyle()`.
 
 ---
 
